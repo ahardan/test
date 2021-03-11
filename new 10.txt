@@ -1,0 +1,15 @@
+<Mar 11, 2021 11:53:53,672 AM EST> <Error> <Deployer> <BEA-149265> <Failure occurred in the execution of deployment request with ID "313375236632400" for task "0" on [partition-name: DOMAIN]. Error is: "weblogic.management.DeploymentException: Error parsing META-INF/application.xml"
+weblogic.management.DeploymentException: Error parsing META-INF/application.xml
+at weblogic.application.internal.EarDeploymentFactory.findOrCreateComponentMBeans(EarDeploymentFactory.java:208)
+at weblogic.application.internal.MBeanFactoryImpl.findOrCreateComponentMBeans(MBeanFactoryImpl.java:61)
+at weblogic.application.internal.MBeanFactoryImpl.createComponentMBeans(MBeanFactoryImpl.java:131)
+at weblogic.application.internal.MBeanFactoryImpl.initializeMBeans(MBeanFactoryImpl.java:91)
+at weblogic.management.deploy.internal.MBeanConverter.createApplicationMBean(MBeanConverter.java:94)
+Truncated. see log file for complete stacktrace
+Caused By: javax.xml.stream.XMLStreamException: Premature end of file encountered
+at weblogic.xml.stax.XMLStreamReaderBase.prime(XMLStreamReaderBase.java:110)
+at weblogic.xml.stax.XMLStreamReaderBase.setInput(XMLStreamReaderBase.java:148)
+at weblogic.xml.stax.XMLStreamInputFactory.createXMLStreamReader(XMLStreamInputFactory.java:322)
+at weblogic.xml.stax.XMLStreamInputFactory.createXMLStreamReader(XMLStreamInputFactory.java:54)
+at weblogic.application.descriptor.BasicMunger2.<init>(BasicMunger2.java:96)
+Truncated. see log file for complete stacktrace
