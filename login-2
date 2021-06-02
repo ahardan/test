@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="loginpage.jsf" id="d1">
+        <af:form id="f1">
+        <af:panelGroupLayout id="pgl2" halign="center" valign="middle" layout="vertical"
+                                         inlineStyle="background-repeat:no-repeat;">
+                        <af:group id="g1">
+                            <af:panelGroupLayout id="pgl1" layout="vertical" halign="center"
+                                               
+                                                 inlineStyle="border-style:groove; border-width:thin; height:400px; width:600px;"
+                                                 valign="middle">
+                                <af:outputFormatted value="dfgdfgdfgdfgdfgdfgdfg"
+                                                    id="of3"
+                                                    inlineStyle="color:Maroon; font-weight:bold; font-size:small; text-align:center;"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:outputFormatted value="Do not attempt to logofdgdfgdfg Law 99-474 (The Computer Fraud informatio"
+                                                    id="of2" inlineStyle="color:Maroon; font-size:small;"/>
+                                <af:separator id="s1"/>
+                                <af:panelHeader text="Welcome to OFDA System" id="ph1">
+                                    <af:panelFormLayout id="pfl1" rendered="#{!securityContext.authenticated}"
+                                                        inlineStyle="text-align:center; vertical-align:middle;" labelAlignment="start"
+                                                        maxColumns="1" labelWidth="200">
+                                        <af:inputText label="Username" id="it1"
+                                                      required="true" requiredMessageDetail="User Name is required"
+                                                      labelAndAccessKey="&amp;User Name" clientComponent="true"
+                                                      helpTopicId="topic1" inlineStyle="text-align:center;"/>
+                                        <af:inputText label="Password" id="it2" 
+                                                      secret="true" required="true"
+                                                      requiredMessageDetail="Password is required"
+                                                      labelAndAccessKey="&amp;Password"
+                                                      inlineStyle="text-align:center;"/>
+                                        <f:facet name="footer">
+                                            <af:panelGroupLayout id="pgl3" halign="center" valign="middle"
+                                                                 layout="vertical">
+                                                <af:panelGroupLayout id="pgl4" layout="horizontal" halign="center">
+                                                    <af:commandButton text="Log in" id="cb1"
+                                                                      
+                                                                      textAndAccessKey="&amp;Log in" rendered="true"
+                                                                      windowModalityType="applicationModal"/>
+                                                    <af:spacer width="4" height="10" id="s3"/>
+                                                      <af:commandButton text="Log in" id="cfb1"
+                                                                      
+                                                                      textAndAccessKey="&amp;Log in" rendered="true"
+                                                                      windowModalityType="applicationModal"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl5" layout="vertical"
+                                                                     rendered="false">
+                                                  
+                                                    <af:panelGroupLayout id="pgabout2">
+                                                        Please Contact
+                                                        <af:goLink id="pt_gl3" destination="mailto:art@ofda.gov"
+                                                                   targetFrame="_self" text="Abacus Team (art@ofda.gov)"
+                                                                   inlineStyle="text-decoration:underline;"/>
+                                                        with Abacus related request and inquiries
+                                                    </af:panelGroupLayout>
+                                                 
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelFormLayout>
+                                </af:panelHeader>
+                            </af:panelGroupLayout>
+                            <af:panelStretchLayout id="psl1" inlineStyle="height:25px;">
+                                <f:facet name="center">
+                                    <af:outputFormatted value="&lt;h1>#{securityContext.userName},Welcome to .&lt;/h1>&lt;h6> . &lt;/h6>"
+                                                        id="of1" 
+                                                        styleUsage="inContextBranding"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:group>
+                    </af:panelGroupLayout>
+        </af:form>
+    </af:document>
+</f:view>
