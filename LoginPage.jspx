@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"   
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="cpsconsoleBundle"
+         value="#{adfBundle['com.avocent.commonplatform.cps.console.ui.resourceBundle']}"/>
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1"
+                 inlineStyle="font-family:Calibri, Verdana, Arial, Helvetica, sans-serif; background-image:url('images/background_tile_Gretchen.png');"
+                 initialFocusId="it1" styleClass="AFStretchWidth">
+      <af:resource type="javascript">
+        function getTimeZone(){
+            var rightNow = new Date();
+            var jan1 = new Date(rightNow.getFullYear(), 0, 1, 0, 0, 0, 0);
+            var temp = jan1.toGMTString();
+            var jan2 = new Date(temp.substring(0, temp.lastIndexOf(" ")-1));
+            var std_time_offset = (jan1 - jan2) / (1000 * 60 * 60);
+            var june1 = new Date(rightNow.getFullYear(), 6, 1, 0, 0, 0, 0);
+            temp = june1.toGMTString();
+            var june2 = new Date(temp.substring(0, temp.lastIndexOf(" ")-1));
+            var daylight_time_offset = (june1 - june2) / (1000 * 60 * 60);
+            var dst;
+            if (std_time_offset == daylight_time_offset) {
+            dst = "0"; // daylight savings time is NOT observed
+            } else {
+            var hemisphere = std_time_offset - daylight_time_offset;
+        if (hemisphere >= 0){
+          	std_time_offset = daylight_time_offset;
+          }
+
+            dst = "1"; // daylight savings time is observed
+            }
+            var source = AdfPage.PAGE.findComponent('d1');
+            AdfCustomEvent.queue(source, "onLoadofPage" , {offset : std_time_offset, dst : dst , hemisphere : hemisphere});
+        }
+	
+	
+        function disableAutoComplete(event)
+        {
+            myForm = document.getElementById('loginForm');
+            myForm.setAttribute('autocomplete', 'off');
+        }
+      </af:resource>
+      <af:clientListener type="load" method="getTimeZone"/>
+      <af:serverListener type="onLoadofPage"
+                         method="#{UserSettingsHelper.setRequiredParams}"/>
+      <af:form id="loginForm" clientComponent="true"
+               inlineStyle="width:100%; height:100%;" defaultCommand="cb1">
+        <div id="dv1" style="margin-top:100px;">
+          <af:panelGroupLayout id="pgl1"
+                               inlineStyle='background-image:url("images/WhiteBackground.png"); width:700px; height:430px; margin:auto; padding:10px;float:'
+                               halign="center" valign="middle"
+                               layout="vertical">
+            <af:panelGroupLayout id="pgl3"
+                                 inlineStyle="height:330px; width:100%;">
+              <h:graphicImage url="/images/TrellisLogo.png" alt="Trellis Logo"
+                              height="31" width="70" id="gi1"
+                              style="width:700px; height:317.0px;"/>
+            </af:panelGroupLayout>
+            <af:spacer width="10" height="20" id="s3"/>
+            <af:panelGroupLayout halign="center" valign="middle" id="pgl99"
+                                 layout="horizontal">
+				   <af:spacer width="120" height="10" id="s8"/>
+              <af:panelGroupLayout id="pgl11" layout="vertical" halign="left">
+                <af:panelFormLayout id="pfl4">
+                  <f:facet name="footer"/>
+                  <af:outputFormatted value="#{sessionScope.UserSettingsHelper.serverName}"
+                                      id="of1"
+                                      inlineStyle="font-size:large; font-weight:bold;"/>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl2" inlineStyle="float:right;"
+                                   layout="vertical">
+                <af:panelFormLayout id="pfl1">
+                  <af:inputText label="#{cpsconsoleBundle['cpsconsole.login.label.USERNAME']}"
+                                id="it1" showRequired="true"
+                                binding="#{loginBean.usernameId}"
+                                value="#{loginBean.username}"
+                                clientComponent="true"/>
+                  <af:inputText label="#{cpsconsoleBundle['cpsconsole.login.label.PASSWORD']}"
+                                id="it2" showRequired="true" secret="true"
+                                value="#{loginBean.password}"
+                                binding="#{loginBean.passwordId}"/>
+                  <af:spacer width="10" height="1" id="s1"/>
+                  <af:goLink text="#{cpsconsoleBundle['cpsconsole.link.FORGOT_MY_PASSWORD']}"
+                             id="gl1" inlineStyle="Text-Decoration:underline;">
+                    <af:popup id="forgotPassword"
+                              binding="#{forgotPasswordBean.popup}">
+                      <af:dialog id="d2" type="none" resize="off" modal="true">
+                        <f:facet name="buttonBar">
+                          <af:panelGroupLayout id="pgl9">
+                            <af:commandButton text="#{cpsconsoleBundle['cpsconsole.forgotpassword.button.SEND']}"
+                                              id="sendPasswordLink"
+                                              actionListener="#{forgotPasswordBean.handleDialog}"
+                                              partialSubmit="true"
+                                              rendered="#{forgotPasswordBean.showSendButton}"/>
+                            <af:commandButton text="#{cpsconsoleBundle['cpsconsole.forgotpassword.button.OK']}"
+                                              id="cb2"
+                                              rendered="#{forgotPasswordBean.showOkButton}"/>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                        <af:switcher id="switcher1"
+                                     facetName="#{forgotPasswordBean.switcherPart}"
+                                     binding="#{forgotPasswordBean.forgotPasswordSwitcher}">
+                          <f:facet name="1">
+                            <af:panelStretchLayout id="psl1"
+                                                   inlineStyle="height:150px; width:350.0px;"
+                                                   endWidth="67px">
+                              <f:facet name="center">
+                                <af:panelGroupLayout id="pgl4" layout="scroll">
+                                  <af:panelFormLayout id="pfl2" rows="4"
+                                                      labelAlignment="start">
+                                    <f:facet name="footer"/>
+                                    <af:panelLabelAndMessage id="plam1"
+                                                             for="it3">
+                                      <af:inputText id="it3" required="true"
+                                                    label="#{cpsconsoleBundle['cpsconsole.login.label.USERNAME']}"
+                                                    showRequired="true"
+                                                    value="#{forgotPasswordBean.username}"
+                                                    binding="#{forgotPasswordBean.userNameInputBox}">
+                                        <af:validateRegExp pattern="#{regExpBean.alphaNumericNoSpaces}"
+                                                           messageDetailNoMatch="#{cpsconsoleBundle['cpsconsole.error.message.INVALID_USER_NAME']}"/>
+                                      </af:inputText>
+                                    </af:panelLabelAndMessage>
+                                    <af:spacer width="10" height="5" id="s2"/>
+                                    <af:panelLabelAndMessage id="plam2"
+                                                             rendered="false">
+                                      <af:outputText value="#{cpsconsoleBundle['cpsconsole.forgotpassword.PROMPT']}"
+                                                     id="ot1"/>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelFormLayout id="pfl5">
+                                      <f:facet name="footer"/>
+                                      <af:selectOneRadio label="#{cpsconsoleBundle['cpsconsole.forgotpassword.PROMPT']}"
+                                                         id="sor1"
+                                                         binding="#{forgotPasswordBean.sorMessageType}">
+                                        <af:selectItem label="#{cpsconsoleBundle['cpsconsole.forgotpassword.option.EMAIL']}"
+                                                       value="email" id="si1"/>
+                                        <af:selectItem label="#{cpsconsoleBundle['cpsconsole.forgotpassword.option.SMS']}"
+                                                       value="sms" id="si2"/>
+                                      </af:selectOneRadio>
+                                    </af:panelFormLayout>
+                                    <af:panelGroupLayout layout="scroll"
+                                                         xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                                         id="pgl7"
+                                                         rendered="false">
+                                      <af:panelGroupLayout id="pgl5"
+                                                           layout="horizontal">
+                                        <af:selectBooleanRadio text="#{cpsconsoleBundle['cpsconsole.forgotpassword.option.EMAIL']}"
+                                                               id="sbr2"
+                                                               group="sendOptions"
+                                                               value="#{forgotPasswordBean.byEmail}"/>
+                                      </af:panelGroupLayout>
+                                      <af:panelGroupLayout id="pgl6"
+                                                           layout="horizontal">
+                                        <af:selectBooleanRadio text="#{cpsconsoleBundle['cpsconsole.forgotpassword.option.SMS']}"
+                                                               id="sbr1"
+                                                               group="sendOptions"
+                                                               value="#{forgotPasswordBean.bySMS}"/>
+                                      </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                  </af:panelFormLayout>
+                                </af:panelGroupLayout>
+                              </f:facet>
+                              <f:facet name="top">
+                                <af:image source="/images/TrellisSmallLogo.png"
+                                          id="i1"/>
+                              </f:facet>
+                            </af:panelStretchLayout>
+                          </f:facet>
+                          <f:facet name="0">
+                            <af:panelStretchLayout id="panelStretchLayout1"
+                                                   inlineStyle="height:200px; width:350.0px;"
+                                                   endWidth="67px">
+                              <f:facet name="center">
+                                <af:panelGroupLayout id="panelGroupLayout1"
+                                                     layout="scroll">
+                                  <af:outputText value="#{cpsconsoleBundle['cpsconsole.forgotpassword.PASSWORD_LINK_HAS_BEEN_SENT']}"
+                                                 id="ot3"
+                                                 rendered="#{forgotPasswordBean.showSuccessMessage}"/>
+                                  <af:spacer width="10" height="20" id="s7"/>
+                                  <af:outputText value="#{cpsconsoleBundle['cpsconsole.forgotpassword.PASSWORD_LINK_WAS_NOT_SENT']}"
+                                                 id="ot2"
+                                                 rendered="#{!forgotPasswordBean.showSuccessMessage}"/>
+                                </af:panelGroupLayout>
+                              </f:facet>
+                              <f:facet name="top">
+                                <af:image source="/images/TrellisSmallLogo.png"
+                                          id="image1"/>
+                              </f:facet>
+                            </af:panelStretchLayout>
+                          </f:facet>
+                        </af:switcher>
+                      </af:dialog>
+                    </af:popup>
+                    <af:showPopupBehavior triggerType="click"
+                                          popupId="forgotPassword"/>
+                  </af:goLink>
+                </af:panelFormLayout>
+                <af:spacer height="10" width="10"/>
+                <af:panelGroupLayout id="pgl0">
+                  <af:commandButton text="#{cpsconsoleBundle['cpsconsole.login.LOG_IN']}"
+                                    id="cb1" inlineStyle="margin-left:80px"
+                                    accessKey="L" action="#{loginBean.doLogin}"
+                                    partialSubmit="true"
+                                    binding="#{loginBean.loginButton}"/>
+                  <af:popup id="changePasswordPopup"
+                            binding="#{loginBean.changePasswordPopup}"
+                            popupCanceledListener="#{resetPasswordBean.exitPopup}">
+                    <af:dialog id="d3" type="none" modal="false"
+                               binding="#{resetPasswordBean.dialog}">
+                      <f:facet name="buttonBar">
+                        <af:panelGroupLayout id="pgl10">
+                          <af:commandButton text="#{cpsconsoleBundle['cpsconsole.resetpassword.CANCEL']}"
+                                            id="cb4"
+                                            actionListener="#{resetPasswordBean.logOut}"
+                                            rendered="#{resetPasswordBean.showResetButton}"
+                                            immediate="true"/>
+                          <af:commandButton text="#{cpsconsoleBundle['cpsconsole.resetpassword.SAVE_NEW_PASSWORD']}"
+                                            id="resetPasswordButton"
+                                            actionListener="#{resetPasswordBean.changePassword}"
+                                            rendered="#{resetPasswordBean.showResetButton}"
+                                            partialSubmit="true"/>
+                          <af:commandButton text="#{cpsconsoleBundle['cpsconsole.resetpassword..button.OK']}"
+                                            id="cb3"
+                                            actionListener="#{resetPasswordBean.logOut}"
+                                            visible="#{resetPasswordBean.showOkButton}"/>
+                        </af:panelGroupLayout>
+                      </f:facet>
+                      <af:switcher id="switcher2"
+                                   binding="#{resetPasswordBean.resetPasswordSwitcher}"
+                                   facetName="#{resetPasswordBean.switcherPart}">
+                        <f:facet name="1">
+                          <af:panelStretchLayout id="psl2"
+                                                 inlineStyle="height:180.0px; width:400px;">
+                            <f:facet name="center">
+                              <af:panelGroupLayout id="pgl8" layout="scroll">
+                                <af:panelFormLayout id="pfl3" rows="2"
+                                                    maxColumns="1">
+                                  <f:facet name="footer"/>
+                                  <af:spacer width="10" height="10" id="s6"/>
+                                  <af:inputText label="#{cpsconsoleBundle['cpsconsole.resetpassword.NEW_PASSWORD']}"
+                                                id="it4" required="true"
+                                                inlineStyle="text-align:left;"
+                                                value="#{resetPasswordBean.newPassword}"
+                                                secret="true">
+                                    <f:validator validatorId="resetPasswordValidator"/>
+                                  </af:inputText>
+                                  <af:inputText label="#{cpsconsoleBundle['cpsconsole.resetpassword.REENTER_PASSWORD']}"
+                                                id="it5" required="true"
+                                                value="#{resetPasswordBean.repeatPassword}"
+                                                secret="true"/>
+                                  <af:spacer width="10" height="10" id="s9"/>
+                                  <af:panelGroupLayout id="pgl12"
+                                                       layout="scroll"
+                                                       rendered="#{bindings.complexity.inputValue eq 'true'}"
+                                                       inlineStyle="font-size:small; color:rgb(0,74,115);">
+                                    <af:outputText value="#{cpsconsoleBundle['cpsconsole.resetpassword.USE']}"
+                                                   id="ot5"/>
+                                    <af:panelGroupLayout id="pgl13">
+                                      <af:outputText value="#{cpsconsoleBundle['cpsconsole.resetpassword.MINIMUM_PASSWORD_LENGHT']}"
+                                                     id="ot9"/>
+                                      <af:spacer width="10" height="10"
+                                                 id="s10"/>
+                                      <af:outputText id="ot10"
+                                                     value="#{bindings.minLength.inputValue}"/>
+                                    </af:panelGroupLayout>
+                                    <af:outputText value="#{cpsconsoleBundle['cpsconsole.resetpassword.UPPER_AND_LOWER_CASE']}"
+                                                   id="ot6"
+                                                   rendered="#{bindings.upperLowerCase.inputValue eq 'true'}"/>
+                                    <af:outputText value="#{cpsconsoleBundle['cpsconsole.resetpassword.NUMERIC_CHARACTERS']}"
+                                                   id="ot7"
+                                                   rendered="#{bindings.numericCharacers.inputValue eq 'true'}"/>
+                                    <af:outputText value="#{cpsconsoleBundle['cpsconsole.resetpassword.NONALPHANUMERIC_SPECIAL_CHAR']}"
+                                                   id="ot8"
+                                                   rendered="#{bindings.nonAlphanumeric.inputValue eq 'true'}"/>
+                                  </af:panelGroupLayout>
+                                </af:panelFormLayout>
+                              </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="top">
+                              <af:image source="/images/TrellisSmallLogo.png"
+                                        id="i2" inlineStyle="text-align:left;"/>
+                            </f:facet>
+                          </af:panelStretchLayout>
+                        </f:facet>
+                        <f:facet name="0">
+                          <af:panelStretchLayout id="panelStretchLayout3"
+                                                 inlineStyle="height:200px; width:350.0px;"
+                                                 endWidth="67px">
+                            <f:facet name="center">
+                              <af:panelGroupLayout id="panelGroupLayout6"
+                                                   layout="scroll">
+                                <af:spacer width="10" height="20" id="spacer4"/>
+                                <af:outputText value="#{cpsconsoleBundle['cpsconsole.resetpassword.PASSWORD_HAS_BEEN_RESET']}"
+                                               id="outputText2"
+                                               inlineStyle="font-size:large; font-weight:bold;"
+                                               rendered="#{resetPasswordBean.showSuccessMessage}"/>
+                                <af:outputText value="#{cpsconsoleBundle['cpsconsole.resetpassword.PASSWORD_WAS_NOT_RESET']}"
+                                               id="ot4"
+                                               rendered="#{!resetPasswordBean.showSuccessMessage}"/>
+                              </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="top">
+                              <af:image source="/images/TrellisSmallLogo.png"
+                                        id="image3"
+                                        inlineStyle="text-align:left;"/>
+                            </f:facet>
+                            <f:facet name="start"/>
+                          </af:panelStretchLayout>
+                        </f:facet>
+                      </af:switcher>
+                    </af:dialog>
+                  </af:popup>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+              <af:spacer height="10" width="100"/>
+              <af:image source="/images/EmersonLogo.png" id="i3"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </div>
+      </af:form>
+      <af:clientListener method="disableAutoComplete" type="load"/>
+    </af:document>
+  </f:view>
+</jsp:root>
