@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <f:loadBundle var="res"
+         basename="gov.nasa.jpl.ocio.fnd.base.BaseViewControllerBundle"/>
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" initialFocusId="pt1:it1" title="#{res.JPL_USER_LOGIN}">
+      <af:form id="f1" defaultCommand="pt1:cb1">
+        <af:pageTemplate viewId="/gov/nasa/jpl/ocio/fnd/template/FndPageTemplate.jspx"
+                         id="pt1" value="#{bindings.pt1}">
+          <f:facet name="center">
+              <af:panelHeader text="Welcome" id="ph1">
+                <af:spacer width="10" height="80" id="s6"/>
+                <af:panelGroupLayout id="pgl6" layout="vertical">
+                  <af:outputFormatted value="#{res['login.instruction']}"
+                                      id="of5" styleUsage="instruction"/>
+                  <af:spacer width="10" height="10" id="s7"/>
+                  <af:panelBorderLayout id="pbl1">
+                    <f:facet name="start">
+                      <af:spacer width="20" height="10" id="s10"/>
+                    </f:facet>
+                    <f:facet name="bottom">
+                      <af:spacer width="10" height="10" id="s13"/>
+                    </f:facet>
+                    <f:facet name="end">
+                      <af:spacer width="20" height="10" id="s12"/>
+                    </f:facet>
+                    <f:facet name="top">
+                      <af:spacer width="10" height="10" id="s11"/>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl1" layout="horizontal"
+                                         halign="center">
+                      <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:panelGroupLayout id="pgl7" layout="vertical"
+                                             halign="center">
+                          <af:spacer width="10" height="10" id="s5"/>
+                          <af:panelGroupLayout id="pgl8" layout="horizontal">
+                            <af:spacer width="40" height="10" id="s4"/>
+                            <af:outputFormatted value="#{res.JPL_USERNAME}" id="of7"
+                                                inlineStyle="font-size:x-small; font-weight:bolder;"/>
+                            <af:spacer width="10" height="10" id="s8"/>
+                            <af:inputText id="it1"
+                                          value="#{SecurityBean.userName}"/>
+                            <af:spacer width="40" height="10" id="s1"/>
+                          </af:panelGroupLayout>
+                          <af:spacer width="10" height="10" id="s14"/>
+                          <af:panelGroupLayout id="pgl9" layout="horizontal">
+                            <af:spacer width="40" height="10" id="s3"/>
+                            <af:outputFormatted value="#{res.JPL_PASSWORD}" id="of8"
+                                                inlineStyle="font-size:x-small; font-weight:bolder;"/>
+                            <af:spacer width="10" height="10" id="s9"/>
+                            <af:inputText id="it2" secret="true"
+                                          value="#{SecurityBean.password}"/>
+                            <af:spacer width="40" height="10" id="s2"/>
+                          </af:panelGroupLayout>
+                          <af:button text="Login" id="cb1"
+                                     action="#{SecurityBean.doProxyLogin}"/>
+                      </af:panelGroupLayout>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:panelBorderLayout>
+                  <af:spacer width="10" height="10" id="s16"/>
+                  <af:outputFormatted value="#{res['login.notice']}"
+                                      id="of9"
+                                      inlineStyle="font-size:x-small; font-weight:bolder; color:Red;"/>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:outputFormatted id="of10" value="#{res['login.notice.desc']}"
+                                      styleUsage="instruction"/>
+                  <af:spacer width="10" height="10" id="s18"/>
+                  <af:outputFormatted value="Disclaimer:" id="of11"
+                                      inlineStyle="font-size:x-small; font-weight:bolder;"/>
+                  <af:spacer width="10" height="10" id="s19"/>
+                  <af:outputFormatted id="of12"
+                                      value="#{res['login.disclaimer']}"
+                                      styleUsage="instruction"/>
+                </af:panelGroupLayout>
+              </af:panelHeader>
+          </f:facet>
+          <f:facet name="navigation"/>
+          <f:attribute name="showNavigationMenu" value="false"/>
+          <f:attribute name="collapseSplitter" value="true"/>
+          <f:attribute name="title"
+                       value="#{res.PLM_FOUNDATION}"/>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>
