@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="loginpage.jsf" id="d1">
+        <af:form  styleClass="login-page" id="f1">
+  <af:panelHeader text="Welcome" id="ph1">
+                <af:spacer width="10" height="80" id="s6"/>
+                <af:panelGroupLayout id="pgl6" layout="vertical">
+                  <af:outputFormatted
+                                      id="of5" styleUsage="instruction"/>
+                  <af:spacer width="10" height="10" id="s7"/>
+                  <af:panelBorderLayout id="pbl1">
+                    <f:facet name="start">
+                      <af:spacer width="20" height="10" id="s10"/>
+                    </f:facet>
+                    <f:facet name="bottom">
+                      <af:spacer width="10" height="10" id="s13"/>
+                    </f:facet>
+                    <f:facet name="end">
+                      <af:spacer width="20" height="10" id="s12"/>
+                    </f:facet>
+                    <f:facet name="top">
+                      <af:spacer width="10" height="10" id="s11"/>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl1" layout="horizontal"
+                                         halign="center">
+                      <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                        <f:facet name="toolbar"/>
+                         <af:panelGroupLayout id="pgl10" styleClass="logo text-center">
+                                        <af:image source="/images/logo.png" shortDesc="logo" id="i1"/>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl16" styleClass="px-2">
+                                        <af:outputText value="U.S. Securities and Exchange Commission CASPORTAL"
+                                                       id="ot8" styleClass="h3 text-uppercase text-dark"/>
+                                    </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl8" styleClass="form px-lg-4">
+                                    <af:panelGroupLayout id="pgle6" styleClass="AFStretchWidth">
+                                        <af:outputText value="Username" id="ot3" styleClass="label"/>
+                                        <af:inputText label="Label 1" id="it1"  simple="true" styleClass="w-100"
+                                                      value="#{login.username}" clientComponent="true"/>
+                                    </af:panelGroupLayout>
+                                    <af:panelGroupLayout id="pgl11" styleClass=" AFStretchWidth">
+                                        <af:outputText value="Password" id="ot4" styleClass="label"/>
+                                        <af:inputText label="Label 1" id="it2" simple="true" styleClass="w-100"
+                                                      value="#{login.password}"/>
+                                    </af:panelGroupLayout>
+                                   
+                                    <af:panelGroupLayout id="pgl14" styleClass=" AFStretchWidth"
+                                                         rendered="false">
+                                        <af:outputText value="Password" id="ot6"/>
+                                       
+                                    </af:panelGroupLayout>
+                                   <af:messages id="mAdvMComment" inline="true" 
+                                                   styleClass="h3 text-dark message-login"/>
+                                    <af:button text="login" id="b1" styleClass="btn-login" action="#{login.doLogin}"/>
+                                    
+                                </af:panelGroupLayout>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:panelBorderLayout>
+                  <af:spacer width="10" height="10" id="s16"/>
+                  <af:outputFormatted 
+                                      id="of9"
+                                      inlineStyle="font-size:x-small; font-weight:bolder; color:Red;"/>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:outputFormatted id="of10" 
+                                      styleUsage="instruction"/>
+                  <af:spacer width="10" height="10" id="s18"/>
+                  <af:outputFormatted value="Disclaimer:" id="of11"
+                                      inlineStyle="font-size:x-small; font-weight:bolder;"/>
+                  <af:spacer width="10" height="10" id="s19"/>
+                  <af:outputFormatted id="of12"
+                                    
+                                      styleUsage="instruction"/>
+                </af:panelGroupLayout>
+              </af:panelHeader>
+
+        </af:form>
+    </af:document>
+</f:view>
