@@ -1,0 +1,69 @@
+ <af:panelHeader text="Welcome" id="ph1">
+                <af:spacer width="10" height="80" id="s6"/>
+                <af:panelGroupLayout id="pgl6" layout="vertical">
+                  <af:outputFormatted
+                                      id="of5" styleUsage="instruction"/>
+                  <af:spacer width="10" height="10" id="s7"/>
+                  <af:panelBorderLayout id="pbl1">
+                    <f:facet name="start">
+                      <af:spacer width="20" height="10" id="s10"/>
+                    </f:facet>
+                    <f:facet name="bottom">
+                      <af:spacer width="10" height="10" id="s13"/>
+                    </f:facet>
+                    <f:facet name="end">
+                      <af:spacer width="20" height="10" id="s12"/>
+                    </f:facet>
+                    <f:facet name="top">
+                      <af:spacer width="10" height="10" id="s11"/>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl1" layout="horizontal"
+                                         halign="center">
+                      <af:panelBox text="PanelBox1" id="pb4" showHeader="never">
+                        <f:facet name="toolbar"/>
+                        <af:panelGroupLayout id="pgl7" layout="vertical"
+                                             halign="center">
+                          <af:spacer width="10" height="10" id="s5"/>
+                          <af:panelGroupLayout id="pgl8" layout="horizontal">
+                            <af:spacer width="40" height="10" id="s4"/>
+                            <af:outputFormatted  id="of7"
+                                                inlineStyle="font-size:x-small; font-weight:bolder;"/>
+                            <af:spacer width="10" height="10" id="s8"/>
+                            <af:inputText id="it1"
+                                          />
+                            <af:spacer width="40" height="10" id="s1"/>
+                          </af:panelGroupLayout>
+                          <af:spacer width="10" height="10" id="s14"/>
+                          <af:panelGroupLayout id="pgl9" layout="horizontal">
+                            <af:spacer width="40" height="10" id="s3"/>
+                            <af:outputFormatted  id="of8"
+                                                inlineStyle="font-size:x-small; font-weight:bolder;"/>
+                            <af:spacer width="10" height="10" id="s9"/>
+                            <af:inputText id="it2" secret="true"
+                                        />
+                            <af:spacer width="40" height="10" id="s2"/>
+                          </af:panelGroupLayout>
+                          <af:button text="Login" id="cb1"
+                                    />
+                      </af:panelGroupLayout>
+                      </af:panelBox>
+                    </af:panelGroupLayout>
+                  </af:panelBorderLayout>
+                  <af:spacer width="10" height="10" id="s16"/>
+                  <af:outputFormatted 
+                                      id="of9"
+                                      inlineStyle="font-size:x-small; font-weight:bolder; color:Red;"/>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:outputFormatted id="of10" 
+                                      styleUsage="instruction"/>
+                  <af:spacer width="10" height="10" id="s18"/>
+                  <af:outputFormatted value="Disclaimer:" id="of11"
+                                      inlineStyle="font-size:x-small; font-weight:bolder;"/>
+                  <af:spacer width="10" height="10" id="s19"/>
+                  <af:outputFormatted id="of12"
+                                    
+                                      styleUsage="instruction"/>
+                </af:panelGroupLayout>
+              </af:panelHeader>
+
+        </af:form>
