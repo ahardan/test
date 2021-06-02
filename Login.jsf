@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Login" id="d1" initialFocusId="pt1:it1">
+        <af:form id="f1" defaultCommand="pt1:cb1">
+            <af:pageTemplate viewId="/templates/MainPageTemplate2.jspx" id="pt1">
+                <f:facet name="content">
+                <af:panelGroupLayout id="pgl2" halign="center" valign="middle" layout="vertical"
+                                         inlineStyle="background-repeat:no-repeat;">
+                        <af:group id="g1">
+                            <af:panelGroupLayout id="pgl1" layout="vertical" halign="center"
+                                                 rendered="#{!securityContext.authenticated}"
+                                                 inlineStyle="border-style:groove; border-width:thin; height:400px; width:600px;"
+                                                 valign="middle">
+                                <af:outputFormatted value="Warning! This is an official U.S. Government computer system."
+                                                    id="of3"
+                                                    inlineStyle="color:Maroon; font-weight:bold; font-size:small; text-align:center;"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:outputFormatted value="Do not attempt to logon to this machine if you do not have specific authorization. Public Law 99-474 (The Computer Fraud &amp; Abuse Act of 1986) prohibits unauthorized access which can result in administrative, disciplinary or criminal proceedings. All transactions processed on this computer system may be monitored, recorded, and disclosed by authorized personnel. E-mail messages are often forwarded to many others by the original recipients. Be sure to identify any sensitive but unclassified (SBU) information sent by e-mail &amp; do not forward it to unauthorized persons. You are personally responsible and accountable for E-mail and other processing done under your user ID. Do not create, process, store or transmit classified National security information on this system. Authorized users of this system who accept the above terms may LOGON to this machine."
+                                                    id="of2" inlineStyle="color:Maroon; font-size:small;"/>
+                                <af:separator id="s1"/>
+                                <af:panelHeader text="Welcome to OFDA System" id="ph1">
+                                    <af:panelFormLayout id="pfl1" rendered="#{!securityContext.authenticated}"
+                                                        inlineStyle="text-align:center; vertical-align:middle;" labelAlignment="start"
+                                                        maxColumns="1" labelWidth="200">
+                                        <af:inputText label="Username" id="it1" value="#{LoginHandler.username}"
+                                                      required="true" requiredMessageDetail="User Name is required"
+                                                      labelAndAccessKey="&amp;User Name" clientComponent="true"
+                                                      helpTopicId="topic1" inlineStyle="text-align:center;"/>
+                                        <af:inputText label="Password" id="it2" value="#{LoginHandler.password}"
+                                                      secret="true" required="true"
+                                                      requiredMessageDetail="Password is required"
+                                                      labelAndAccessKey="&amp;Password"
+                                                      inlineStyle="text-align:center;"/>
+                                        <f:facet name="footer">
+                                            <af:panelGroupLayout id="pgl3" halign="center" valign="middle"
+                                                                 layout="vertical">
+                                                <af:panelGroupLayout id="pgl4" layout="horizontal" halign="center">
+                                                    <af:commandButton text="Log in" id="cb1"
+                                                                      action="#{LoginHandler.performLogin}"
+                                                                      textAndAccessKey="&amp;Log in" rendered="true"
+                                                                      windowModalityType="applicationModal"/>
+                                                    <af:spacer width="4" height="10" id="s3"/>
+                                                    <af:resetButton text="Reset" id="rb1"
+                                                                    textAndAccessKey="&amp;Reset"/>
+                                                </af:panelGroupLayout>
+                                                <af:panelGroupLayout id="pgl5" layout="vertical"
+                                                                     rendered="false">
+                                                    <a href="mailto:art@ofda.gov?subject=ART: New User/ Forgot User Name/ Password&amp;body=Please provide the following:-%0AUser Name:%0AFirst Name:%0ALast Name:%0AEmail:%0AAwardee/ Organization details:%0ARequest Description:%0A"
+                                                       xmlns="http://www.w3.org/1999/xhtml" target="_self">New User/
+                                                                                                           Forgot
+                                                                                                           Username/
+                                                                                                           Password</a>
+                                                    <af:panelGroupLayout id="pgabout2">
+                                                        Please Contact
+                                                        <af:goLink id="pt_gl3" destination="mailto:art@ofda.gov"
+                                                                   targetFrame="_self" text="Abacus Team (art@ofda.gov)"
+                                                                   inlineStyle="text-decoration:underline;"/>
+                                                        with Abacus related request and inquiries
+                                                    </af:panelGroupLayout>
+                                                    <a xmlns="http://www.w3.org/1999/xhtml" target="_blank"
+                                                       href="images/dcha_privacy_notice.pdf">DCHA Privacy Notice</a>
+                                                </af:panelGroupLayout>
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelFormLayout>
+                                </af:panelHeader>
+                            </af:panelGroupLayout>
+                            <af:panelStretchLayout id="psl1" inlineStyle="height:25px;">
+                                <f:facet name="center">
+                                    <af:outputFormatted value="&lt;h1>#{securityContext.userName},Welcome to OFDA ART.&lt;/h1>&lt;h6> Please use the above menu to navigate. &lt;/h6>"
+                                                        id="of1" rendered="#{securityContext.authenticated}"
+                                                        styleUsage="inContextBranding"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:group>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:attribute name="helpTopicID" value="login"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>
